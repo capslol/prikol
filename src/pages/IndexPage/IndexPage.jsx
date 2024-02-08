@@ -1,18 +1,17 @@
 import React, {useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import './IndexPage.css';
+import Modal from "../../components/modal/Modal";
 const IndexPage = () => {
-    const navigate = useNavigate()
     const [selectedImage, setSelectedImage] = useState(null);
+    const navigate = useNavigate()
 
     // modal window ///////////////////////////////
     const [isModalOpen, setIsModalOpen] = useState(false); // Состояние для открытия/закрытия модального окна
-
     // Функция для открытия модального окна
     const openModal = () => {
         setIsModalOpen(true);
     };
-
     // Функция для закрытия модального окна
     const closeModal = () => {
         setIsModalOpen(false);
@@ -31,7 +30,11 @@ const IndexPage = () => {
                 <img src="./images/avatar-2.jpg" className={selectedImage === "./images/avatar-2.jpg" ? "selected" : ""} alt="Картинка 2" onClick={() => handleImageClick("./images/avatar-2.jpg")} />
                 <img src="./images/avatar-3.jpg" className={selectedImage === "./images/avatar-3.jpg" ? "selected" : ""} alt="Картинка 3" onClick={() => handleImageClick("./images/avatar-3.jpg")} />
             </div>
-            <button className={'avatar__button-submit'}>Выбрать(результат нельзя отменить</button>
+            <button onClick={openModal} className={'avatar__button-submit'}>Выбрать(результат нельзя отменить</button>
+            <Modal isOpen={isModalOpen} onClose={closeModal}>
+                <h2>Заголовок модального окна</h2>
+                <p>Содержимое модального окна...</p>
+            </Modal>
         </div>
     );
 };

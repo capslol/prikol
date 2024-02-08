@@ -1,0 +1,18 @@
+.header{
+    height: 10vh;
+    display: flex;
+    justify-content: space-between;
+}
+.heart-icon{
+    /*max-width: 30%;*/
+    height: 50px;
+}
+.heart_counter-wrapper{
+    display: flex;
+    align-items: center;
+    width: 80px;
+    justify-content: space-between;
+}
+.heart_counter{
+    font-size: 30px;
+}

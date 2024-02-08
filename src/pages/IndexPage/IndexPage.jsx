@@ -32,9 +32,18 @@ const IndexPage = () => {
             </div>
             <button onClick={openModal} className={'avatar__button-submit'}>Выбрать(результат нельзя отменить</button>
             <Modal isOpen={isModalOpen} onClose={closeModal}>
-                <h2>Заголовок модального окна</h2>
-                <p>Содержимое модального окна...</p>
+                {!selectedImage ? (
+                    // Если фото не выбрана, отображаем сообщение
+                    <h2>Ты забыла выбрать фото</h2>
+                ) : (
+                    // Если фото выбрана, отображаем информацию и кнопку "Дальше"
+                    <>
+                        <h2>Оно будет твоей аватаркой до конца игры</h2>
+                        <button className={'next-button'}>Дальше</button>
+                    </>
+                )}
             </Modal>
+
         </div>
     );
 };

@@ -3,58 +3,63 @@ import {DndContext} from '@dnd-kit/core';
 
 import Food from "../../components/PuzzlePiece/Food";
 import Dobby from "../../components/PuzzleBoard/Dobby";
+import './FeedDobbyPage.css'
 
 const FeedDobbyPage = () => {
-    const [isDropped, setIsDropped] = useState(false);
-    const [hungryLevel, setHungryLevel] = useState(0);
-
-    const draggableMarkup = (
-            <>
-                <Food>
-                    <img
-                        src="./images/cucumber.png"
-                        alt=""
-                        style={{width: '100px', height: 'auto'}} // Установка размеров изображения
-                    />
-                </Food>
-                <Food>
-                    <img
-                        src="./images/cucumber.png"
-                        alt=""
-                        style={{width: '100px', height: 'auto'}} // Установка размеров изображения
-                    />
-                </Food>
-            </>
-        )
-    ;
+    const [droppedIds, setDroppedIds] = useState([]); // Состояние для хранения id брошенных элементов
 
     const handleDragEnd = (event) => {
-        if (event.over && event.over.id === 'dobby') { // Проверяем, что брошен на Dobby
-            setIsDropped(true);
-            setHungryLevel((prevState) => {
-                prevState++
-            });
-            console.log(hungryLevel)
+        const {over, active} = event;
+
+        if (over && over.id === 'dobby') { // Если брошено на Dobby
+            const droppedId = active.id;
+            if (!droppedIds.includes(droppedId)) { // Проверяем, что id еще не был брошен
+                setDroppedIds(prevIds => [...prevIds, droppedId]); // Добавляем id в состояние
+            }
         }
     };
 
     return (
         <DndContext onDragEnd={handleDragEnd}>
-            {!isDropped && draggableMarkup} {/* Показываем только если еще не брошено */}
+            <div className="food-content">
+                {!droppedIds.includes('cucumber') && ( // Проверяем, что 'cucumber1' еще не брошен
+                    <Food id={'cucumber'}>
+                        <img
+                            src="./images/cucumber.png"
+                            alt=""
+                            style={{width: '100px', height: 'auto'}}
+                        />
+                    </Food>
+                )}
+                {!droppedIds.includes('candy') && ( // Проверяем, что 'cucumber2' еще не брошен
+                    <Food id={'candy'}>
+                        <img
+                            src="./images/candy.png"
+                            alt=""
+                            style={{width: '100px', height: 'auto'}}
+                        />
+                    </Food>
+                )}
+                {!droppedIds.includes('poop') && ( // Проверяем, что 'cucumber1' еще не брошен
+                    <Food id={'poop'}>
+                        <img
+                            src="./images/poop.png"
+                            alt=""
+                            style={{width: '100px', height: 'auto'}}
+                        />
+                    </Food>
+                )}
+            </div>
             <Dobby>
                 <div>
                     <img src="./images/dobby.webp" alt=""/>
                 </div>
-                {/* Показываем Dobby если брошено, иначе 'Drop here' */}
             </Dobby>
         </DndContext>
     );
 };
 
 export default FeedDobbyPage;
-
-
-
 
 
 // import React, { useState } from 'react';

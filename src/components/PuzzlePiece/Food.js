@@ -1,9 +1,9 @@
 import React from 'react';
 import { useDraggable } from '@dnd-kit/core';
 
-const Food = (props) => {
+const Food = ({ id, children }) => {
     const { attributes, listeners, setNodeRef, transform } = useDraggable({
-        id: 'food',
+        id: id || 'food', // Используем переданный id или значение по умолчанию 'food'
     });
     const style = transform ? {
         transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
@@ -11,7 +11,7 @@ const Food = (props) => {
 
     return (
         <div ref={setNodeRef} style={style} {...listeners} {...attributes}>
-            {props.children}
+            {children}
         </div>
     );
 };

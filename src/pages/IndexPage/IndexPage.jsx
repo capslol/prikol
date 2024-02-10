@@ -24,7 +24,7 @@ const IndexPage = () => {
 
     return (
         <div>
-            <button onClick={() => navigate('/login')}></button>
+            <button onClick={() => navigate('/puzzle')}></button>
             <div className="images-container">
                 <img src="./images/avatar-1.jpg" className={selectedImage === "./images/avatar-1.jpg" ? "selected" : ""} alt="Картинка 1" onClick={() => handleImageClick("./images/avatar-1.jpg")} />
                 <img src="./images/avatar-2.jpg" className={selectedImage === "./images/avatar-2.jpg" ? "selected" : ""} alt="Картинка 2" onClick={() => handleImageClick("./images/avatar-2.jpg")} />

@@ -7,6 +7,7 @@ import './FeedDobbyPage.css'
 
 const FeedDobbyPage = () => {
     const [droppedIds, setDroppedIds] = useState([]); // Состояние для хранения id брошенных элементов
+    const [hungryLevel, setHungryLevel] = useState(0); // Состояние для хранения id брошенных элементов
 
     const handleDragEnd = (event) => {
         const {over, active} = event;
@@ -16,8 +17,20 @@ const FeedDobbyPage = () => {
             if (!droppedIds.includes(droppedId)) { // Проверяем, что id еще не был брошен
                 setDroppedIds(prevIds => [...prevIds, droppedId]); // Добавляем id в состояние
             }
+            setHungryLevel(prevState => prevState + 1)
+            console.log(hungryLevel)
         }
     };
+
+    let dobbyClassName = 'dobby-normal';
+
+    if (hungryLevel === 1) {
+        dobbyClassName = 'dobby-big';
+    } else if (hungryLevel === 2) {
+        dobbyClassName = 'dobby-very-big';
+    } else if (hungryLevel === 3) {
+        dobbyClassName = 'dobby-very-very-big';
+    }
 
     return (
         <DndContext onDragEnd={handleDragEnd}>
@@ -51,8 +64,8 @@ const FeedDobbyPage = () => {
                 )}
             </div>
             <Dobby>
-                <div>
-                    <img src="./images/dobby.webp" alt=""/>
+                <div  className={`dobby ${dobbyClassName}`}>
+                    <img  src="./images/dobby.webp" alt=""/>
                 </div>
             </Dobby>
         </DndContext>

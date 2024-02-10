@@ -1,0 +1,81 @@
+@font-face {
+    font-family: 'BigShouldersDisplay';
+    src: url('../../fonts/BigShouldersDisplay-Thin.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'BigShouldersDisplay';
+    src: url('../../fonts/BigShouldersDisplay-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'BigShouldersDisplay';
+    src: url('../../fonts/BigShouldersDisplay-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'BubblezGraffiti';
+    src: url('../../fonts/BubblezGraffiti.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+:root{
+    --background: #ffffff;
+    --background-secondary: #ffffff;
+    --text-primary: black;
+    --text-secondary: grey;
+    --main-color: #40DF9F;
+    --secondary-color: green;
+    --main-border: #CBCBCB;
+}
+[data-theme='dark']{
+    --background: #22343C;
+    --background-secondary: #2A3C44;
+    --text-primary: #ffffff ;
+    --text-secondary: grey;
+    --secondary-color: green;
+    --main-border: #CBCBCB;
+}
+
+html{
+    font-size: 26px;
+
+}
+
+body{
+    border: 3px solid #ad3974;
+    margin: 0;
+    padding: 0;
+    overflow-y: scroll;
+}
+body * {
+    font-family: "BubblezGraffiti";
+    color: #f852aa;
+    box-sizing: border-box;
+}
+a {
+    text-decoration: none;
+    color: inherit; /* Используем цвет, унаследованный от родителя */
+}
+.wrapper{
+    display: flex;
+    height: calc(100vh - 100px);
+    width: 100vw;
+}
+.app-container{
+    background-color: var(--background);
+    color: var(--text-primary);
+    width: 100%;
+    padding: 0 100px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    /*transition: all .5s;*/
+}

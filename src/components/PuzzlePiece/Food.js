@@ -10,7 +10,7 @@ const Food = ({ id, children }) => {
     } : undefined;
 
     return (
-        <div ref={setNodeRef} style={style} {...listeners} {...attributes}>
+        <div className={'food'} ref={setNodeRef} style={style} {...listeners} {...attributes}>
             {children}
         </div>
     );

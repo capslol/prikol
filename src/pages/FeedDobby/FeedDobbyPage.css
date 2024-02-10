@@ -3,5 +3,29 @@
     display: flex;
     justify-content: space-around;
 }
+.dobby{
+    margin: 50px 0;
+    display: flex;
+    justify-content: center;
+}
+.dobby-normal img{
+    width: 300px;
+
+}
+.dobby-big img{
+    width: 400px;
+}
+
+.dobby-very-big img{
+    width: 450px;
+}.
+ dobby-very-very-big img{
+    width: 500px;
+}
+.food{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 

@@ -1,4 +1,5 @@
 .header{
+    padding: 0 50px;
     height: 10vh;
     display: flex;
     justify-content: space-between;
@@ -15,4 +16,14 @@
 }
 .heart_counter{
     font-size: 30px;
+}
+.avatar-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.avatar{
+    width: 8vh;
+    height: 8vh;
+    border-radius: 100%;
 }

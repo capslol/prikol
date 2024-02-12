@@ -3,10 +3,12 @@ import './Header.css';
 import {useHeart} from "../../contexts/HeartProvider";
 
 const Header = () => {
-    const {heartCounter} = useHeart()
+    const {heartCounter, avatarSrc} = useHeart()
     return (
         <div className={'header'}>
-            <img src="" alt=""/>
+            <div className={'avatar-container'}>
+                <img className={'avatar'} src={avatarSrc} alt=""/>
+            </div>
             <div className="heart_counter-wrapper">
                 <span className={'heart_counter'}>{heartCounter}</span>
                 <img className={'heart-icon'} src="/images/heart-icon.png" alt=""/>

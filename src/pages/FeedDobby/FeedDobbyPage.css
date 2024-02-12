@@ -1,31 +1,92 @@
+.kitchen {
+    width: 100%; /* Ширина контейнера */
+    height: calc(100vh - 100px);
+    background-image: url('/public/images/bg_feed_game.jpg'); /* Путь к изображению */
+    background-size: cover; /* Растягиваем изображение на всю область контейнера */
+    background-position: center; /* Центрируем изображение */
+}
 .food-content {
-
     display: flex;
     justify-content: space-around;
 }
-.dobby{
-    margin: 50px 0;
-    display: flex;
-    justify-content: center;
-}
-.dobby-normal img{
-    width: 300px;
-
-}
-.dobby-big img{
-    width: 400px;
-}
-
-.dobby-very-big img{
-    width: 450px;
-}.
- dobby-very-very-big img{
-    width: 500px;
-}
+/* Общие стили для Dobby */
 .food{
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 999;
+}
+.carrot{
+    position: absolute;
+    bottom: 43%;
+    right: 6%;
+}
+.strawberry{
+    position: absolute;
+    bottom: 40%;
+    left: 28%
+}
+.cucumber{
+    position: absolute;
+    right: 23%;
+    bottom: 27%;
+}
+.candy{
+    position: absolute;
+    right: 100px;
+    bottom: 16%;
+}
+.poop{
+    position: absolute;
+    right: 39%;
+    bottom: 16%;
+}
+.dobby{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 600px
+}
+.dobby-image {
+    width: 100%;
+    height: 100%;
+    opacity: 1; /* Устанавливаем начальную прозрачность */
+    transition: opacity 0.3s ease-in-out; /* Плавное изменение прозрачности */
 }
 
+/* Класс для анимации смены изображения */
+.dobby-image-changing {
+    opacity: 0; /* Устанавливаем прозрачность 0 для плавной смены */
+}
 
+@keyframes fadeIn {
+    from {
+        opacity: 0; /* Начальная прозрачность */
+    }
+    to {
+        opacity: 1; /* Конечная прозрачность */
+    }
+}
+
+/* Анимация для исчезания изображения Dobby */
+@keyframes fadeOut {
+    from {
+        opacity: 1; /* Начальная прозрачность */
+    }
+    to {
+        opacity: 0; /* Конечная прозрачность */
+    }
+}
+
+/* Класс для анимации появления изображения */
+.dobby-image-show {
+    animation: fadeIn 0.3s ease-in-out forwards; /* Применяем анимацию fadeIn */
+}
+
+/* Класс для анимации исчезания изображения */
+.dobby-image-hide {
+    animation: fadeOut 0.3s ease-in-out forwards; /* Применяем анимацию fadeOut */
+}

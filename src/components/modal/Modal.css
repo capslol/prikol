@@ -7,7 +7,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(255, 192, 203, 0.8); /* Розовый полупрозрачный фон */
+    background-color: rgba(255, 192, 203, 0.3); /* Розовый полупрозрачный фон */
     display: flex;
     justify-content: center;
     align-items: center;

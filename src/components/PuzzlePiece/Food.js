@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDraggable } from '@dnd-kit/core';
 
-const Food = ({ id, children }) => {
+const Food = ({ id, children, className }) => {
     const { attributes, listeners, setNodeRef, transform } = useDraggable({
         id: id || 'food', // Используем переданный id или значение по умолчанию 'food'
     });
@@ -10,7 +10,7 @@ const Food = ({ id, children }) => {
     } : undefined;
 
     return (
-        <div className={'food'} ref={setNodeRef} style={style} {...listeners} {...attributes}>
+        <div className={`food ${className}`} ref={setNodeRef} style={style} {...listeners} {...attributes}>
             {children}
         </div>
     );

@@ -1,21 +1,25 @@
-import React, {createContext, useCallback, useContext,  useState} from 'react';
-export const CartContext = createContext();
+import React, { createContext, useCallback, useContext, useState } from 'react';
+
+export const HeartContext = createContext();
 
 export const HeartProvider = ({ children }) => {
+    const [heartCounter, setHeartCounter] = useState(0);
+    const [avatarSrc, setAvatarSrc] = useState('');
 
-    const [heartCounter, setHeartCounter] = useState(0)
-    const updateHeartCounter = (value) => {
-        setHeartCounter(heartCounter + value);
-    };
+    const updateHeartCounter  = useCallback((value) => {
+        setHeartCounter((prevCounter) => prevCounter + value);
+    }, []);
 
-
+    const updateAvatarSrc = useCallback((value) => {
+        setAvatarSrc( value);
+    }, []);
     return (
-        <CartContext.Provider value={{ heartCounter, updateHeartCounter }}>
+        <HeartContext.Provider value={{ heartCounter, updateHeartCounter, avatarSrc,  updateAvatarSrc  }}>
             {children}
-        </CartContext.Provider>
+        </HeartContext.Provider>
     );
 };
 
-export const useHeart =  () => {
-    return useContext(CartContext)
-}
+export const useHeart = () => {
+    return useContext(HeartContext);
+};

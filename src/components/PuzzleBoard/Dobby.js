@@ -10,9 +10,9 @@ const Dobby = (props) => {
     };
 
     return (
-        <div ref={setNodeRef} style={style}>
+        < div className={'dobby'} ref={setNodeRef} style={style}>
             {props.children}
-        </div>
+        </div >
     );
 };
 

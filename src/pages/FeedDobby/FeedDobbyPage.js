@@ -1,74 +1,93 @@
 import React, {useState} from 'react';
 import {DndContext} from '@dnd-kit/core';
+import {CSSTransition} from 'react-transition-group';
+
 
 import Food from "../../components/PuzzlePiece/Food";
 import Dobby from "../../components/PuzzleBoard/Dobby";
 import './FeedDobbyPage.css'
+import Modal from "../../components/modal/Modal";
 
 const FeedDobbyPage = () => {
     const [droppedIds, setDroppedIds] = useState([]); // Состояние для хранения id брошенных элементов
     const [hungryLevel, setHungryLevel] = useState(0); // Состояние для хранения id брошенных элементов
-
+    const [dobbyImageSrc, setDobbyImageSrc] = useState('./images/dobby_dialog-1.png'); // Состояние для хранения id брошенных элементов
     const handleDragEnd = (event) => {
         const {over, active} = event;
 
         if (over && over.id === 'dobby') { // Если брошено на Dobby
             const droppedId = active.id;
+
             if (!droppedIds.includes(droppedId)) { // Проверяем, что id еще не был брошен
                 setDroppedIds(prevIds => [...prevIds, droppedId]); // Добавляем id в состояние
+                setHungryLevel(prevState => prevState + 1)
+                console.log(hungryLevel)
+
+                if (droppedId === 'cucumber') {
+                    setDobbyImageSrc("./images/dobby_dialog-2_cucumber.png")
+                } else if (droppedId === 'candy') {
+                    setDobbyImageSrc("./images/dobby_dialog-3_candy.png")
+                } else if (droppedId === 'carrot') {
+                    setDobbyImageSrc("./images/dobby_dialog_carrot.png")
+                } else if (droppedId === 'poop') {
+                    setDobbyImageSrc("./images/dobby_dialog_poop.png")
+                }
             }
-            setHungryLevel(prevState => prevState + 1)
-            console.log(hungryLevel)
         }
     };
 
-    let dobbyClassName = 'dobby-normal';
+    // modal window ///////////////////////////////
+    const [isModalOpen, setIsModalOpen] = useState(false); // Состояние для открытия/закрытия модального окна
+    // Функция для открытия модального окна
+    const openModal = () => {
+        setIsModalOpen(true);
+    };
+    // Функция для закрытия модального окна
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
+    // modal window ///////////////////////////////
 
-    if (hungryLevel === 1) {
-        dobbyClassName = 'dobby-big';
-    } else if (hungryLevel === 2) {
-        dobbyClassName = 'dobby-very-big';
-    } else if (hungryLevel === 3) {
-        dobbyClassName = 'dobby-very-very-big';
-    }
+
+    const fruits = [
+        { id: 'carrot', src: "./images/carrot.png", alt: "Carrot", width: '100px' },
+        { id: 'cucumber', src: "./images/cucumber.png", alt: "Cucumber", width: '100px' },
+        { id: 'candy', src: "./images/candy.png", alt: "Candy", width: '100px' },
+        { id: 'poop', src: "./images/poop.png", alt: "Poop", width: '60px' },
+        { id: 'strawberry', src: "./images/straw.png", alt: "Strawberry", width: '75px' }
+    ];
 
     return (
-        <DndContext onDragEnd={handleDragEnd}>
-            <div className="food-content">
-                {!droppedIds.includes('cucumber') && ( // Проверяем, что 'cucumber1' еще не брошен
-                    <Food id={'cucumber'}>
-                        <img
-                            src="./images/cucumber.png"
-                            alt=""
-                            style={{width: '100px', height: 'auto'}}
-                        />
+        <div className="kitchen">
+            <DndContext onDragEnd={handleDragEnd}>
+                {fruits.map(({ id, src, alt, width }) => (
+                    !droppedIds.includes(id) &&
+                    <Food key={id} id={id} className={id} onDrop={() => handleDragEnd(id)}>
+                        <img src={src} alt={alt} style={{ width, height: 'auto' }} />
                     </Food>
-                )}
-                {!droppedIds.includes('candy') && ( // Проверяем, что 'cucumber2' еще не брошен
-                    <Food id={'candy'}>
-                        <img
-                            src="./images/candy.png"
-                            alt=""
-                            style={{width: '100px', height: 'auto'}}
-                        />
-                    </Food>
-                )}
-                {!droppedIds.includes('poop') && ( // Проверяем, что 'cucumber1' еще не брошен
-                    <Food id={'poop'}>
-                        <img
-                            src="./images/poop.png"
-                            alt=""
-                            style={{width: '100px', height: 'auto'}}
-                        />
-                    </Food>
-                )}
-            </div>
-            <Dobby>
-                <div  className={`dobby ${dobbyClassName}`}>
-                    <img  src="./images/dobby.webp" alt=""/>
-                </div>
-            </Dobby>
-        </DndContext>
+                ))}
+                <CSSTransition
+                    in={true}
+                    classNames="dobby-animation" // Префикс классов анимации
+                    timeout={300} // Время анимации в миллисекундах
+                >
+
+                    <Dobby>
+                        <img className={`dobby-image`} src={dobbyImageSrc} alt=""/>
+                    </Dobby>
+                </CSSTransition>
+            </DndContext>
+
+            {hungryLevel === 5 && (
+                <Modal isOpen={true} onClose={closeModal}>
+                    <>
+                        <h2>Ты молодец, накормила малыша</h2>
+                        <h2>Можешь идти дальше</h2>
+                        <button className={'next-button'}>Дальше</button>
+                    </>
+                </Modal>
+            )}
+        </div>
     );
 };
 

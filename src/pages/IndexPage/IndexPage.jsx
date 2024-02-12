@@ -2,9 +2,12 @@ import React, {useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import './IndexPage.css';
 import Modal from "../../components/modal/Modal";
+import {useHeart} from "../../contexts/HeartProvider";
 const IndexPage = () => {
     const [selectedImage, setSelectedImage] = useState(null);
     const navigate = useNavigate()
+
+    const {updateAvatarSrc} = useHeart()
 
     // modal window ///////////////////////////////
     const [isModalOpen, setIsModalOpen] = useState(false); // Состояние для открытия/закрытия модального окна
@@ -39,7 +42,11 @@ const IndexPage = () => {
                     // Если фото выбрана, отображаем информацию и кнопку "Дальше"
                     <>
                         <h2>Оно будет твоей аватаркой до конца игры</h2>
-                        <button className={'next-button'}>Дальше</button>
+                        <button
+                            onClick={() => {
+                                updateAvatarSrc(selectedImage)
+                                navigate('/login')
+                        }} className={'next-button'}>Дальше</button>
                     </>
                 )}
             </Modal>

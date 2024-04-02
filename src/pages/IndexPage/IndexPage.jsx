@@ -6,6 +6,7 @@ import {useHeart} from "../../contexts/HeartProvider";
 const IndexPage = () => {
     const [selectedImage, setSelectedImage] = useState(null);
     const navigate = useNavigate()
+    const { updateHeartCounter } = useHeart();
 
     const {updateAvatarSrc} = useHeart()
 
@@ -26,8 +27,8 @@ const IndexPage = () => {
     };
 
     return (
-        <div>
-            <button onClick={() => navigate('/puzzle')}></button>
+        <div className={'index-container'}>
+            <h2>Выбери свою лучшую фотку)</h2>
             <div className="images-container">
                 <img src="./images/avatar-1.jpg" className={selectedImage === "./images/avatar-1.jpg" ? "selected" : ""} alt="Картинка 1" onClick={() => handleImageClick("./images/avatar-1.jpg")} />
                 <img src="./images/avatar-2.jpg" className={selectedImage === "./images/avatar-2.jpg" ? "selected" : ""} alt="Картинка 2" onClick={() => handleImageClick("./images/avatar-2.jpg")} />
@@ -45,6 +46,7 @@ const IndexPage = () => {
                         <button
                             onClick={() => {
                                 updateAvatarSrc(selectedImage)
+                                updateHeartCounter(+1)
                                 navigate('/login')
                         }} className={'next-button'}>Дальше</button>
                     </>

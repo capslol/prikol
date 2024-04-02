@@ -1,3 +1,9 @@
+.index-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 .images-container {
     display: flex; /* Используем flex-контейнер */
     justify-content: space-between; /* Равномерно распределяем изображения по контейнеру */

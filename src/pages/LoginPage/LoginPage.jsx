@@ -11,12 +11,12 @@ const LoginPage = () => {
     const {updateHeartCounter} = useHeart()
 
     const handleLogin = () => {
-        if (password === 'нагетс'){
+        if (password.trim().toLowerCase() === 'нагетс') {
             console.log(1)
-            alert('в слове Наггетс - 2 "г"');
+            alert('в слове Наггетс - 2 "г" БУСИНКА');
         }
         // Проверка правильности логина и пароля
-        if (password === 'наггетс') {
+        if (password.trim().toLowerCase() === 'наггетс') {
             console.log(2)
             setLoggedIn(true);
             updateHeartCounter(1)

@@ -34,6 +34,20 @@ body{
     padding: 0;
     overflow-y: scroll;
 }
+.button-start{
+    width: 300px;
+    font-size: 30px;
+    position: absolute;
+    right: 100px;
+    bottom: 20px;
+}
+.slick-slider{
+    width: 100vw;
+    height: 500px;
+}
+.slick-slide img{
+    width: 100%;
+}
 body * {
     font-family: "BubblezGraffiti";
     color: #f852aa;
@@ -58,4 +72,23 @@ a {
     flex-direction: column;
     min-height: 100vh;
     /*transition: all .5s;*/
+}
+
+.valentinka{
+    margin: 50px auto;
+    width: 70%;
+    z-index: 999;
+}
+.maksim{
+    position: absolute;
+}
+.valentinka-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.h2-valentinka{
+    position: absolute;
+    top: 0;
 }

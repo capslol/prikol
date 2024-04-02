@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {DndContext} from '@dnd-kit/core';
 import {CSSTransition} from 'react-transition-group';
 
@@ -7,11 +7,15 @@ import Food from "../../components/PuzzlePiece/Food";
 import Dobby from "../../components/PuzzleBoard/Dobby";
 import './FeedDobbyPage.css'
 import Modal from "../../components/modal/Modal";
+import {useNavigate} from "react-router-dom";
+import {useHeart} from "../../contexts/HeartProvider";
 
 const FeedDobbyPage = () => {
     const [droppedIds, setDroppedIds] = useState([]); // Состояние для хранения id брошенных элементов
     const [hungryLevel, setHungryLevel] = useState(0); // Состояние для хранения id брошенных элементов
     const [dobbyImageSrc, setDobbyImageSrc] = useState('./images/dobby_dialog-1.png'); // Состояние для хранения id брошенных элементов
+    const navigate = useNavigate()
+    const { updateHeartCounter } = useHeart();
     const handleDragEnd = (event) => {
         const {over, active} = event;
 
@@ -35,6 +39,20 @@ const FeedDobbyPage = () => {
             }
         }
     };
+
+    useEffect(() => {
+        const handleTouchMove = (e) => {
+            if (e.touches.length > 1) {
+                e.preventDefault(); // Отмена прокрутки, если есть более одного касания
+            }
+        };
+
+        document.addEventListener('touchmove', handleTouchMove, { passive: false });
+
+        return () => {
+            document.removeEventListener('touchmove', handleTouchMove);
+        };
+    }, []);
 
     // modal window ///////////////////////////////
     const [isModalOpen, setIsModalOpen] = useState(false); // Состояние для открытия/закрытия модального окна
@@ -83,7 +101,10 @@ const FeedDobbyPage = () => {
                     <>
                         <h2>Ты молодец, накормила малыша</h2>
                         <h2>Можешь идти дальше</h2>
-                        <button className={'next-button'}>Дальше</button>
+                        <button onClick={() => {
+                            navigate('/valentinka')
+                            updateHeartCounter(+1)
+                        }} className={'next-button'}>Дальше</button>
                     </>
                 </Modal>
             )}

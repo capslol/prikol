@@ -10,7 +10,7 @@
     background-color: rgba(255, 192, 203, 0.3); /* Розовый полупрозрачный фон */
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .modal-content {
@@ -21,6 +21,11 @@
     padding: 50px 20px;
     border-radius: 15px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    justify-content: center;
+    align-items: center;
+    min-height: 300px;
+    max-height: 600px;
+    margin-top: 10vh;
 }
 
 .modal-close {
